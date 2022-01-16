@@ -10,6 +10,7 @@ import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -28,11 +29,12 @@ class PessoaTest {
 	//Método que se inicia primeiro para inserir os dados através do contrutor
 	@BeforeEach
 	public void start() {
-		pessoaModel = new PessoaModel("George", "11999999999", 30, "taboao", "SP", 500);
+		pessoaModel = new PessoaModel(0L, "George", "11999999999", 30, "taboao", "SP", 500);
 	}
 
 	//Método de teste, verifica se está vazio ou não
 	@Test
+	@DisplayName("Verifica se o cadastro está certo")
 	void validaUsuarioCorretoRetornaTrue() {
 		Set<ConstraintViolation<PessoaModel>> objetoViolado = validator.validate(pessoaModel);
 		

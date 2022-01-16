@@ -37,7 +37,8 @@ public class PessoaModel {
 
 	// Métodos construtores para test jUnit
 
-	public PessoaModel(String nome, String telefone, int idade, String cidade, String estado, int score) {
+	public PessoaModel(Long id, String nome, String telefone, int idade, String cidade, String estado, int score) {
+		this.id = id;
 		this.nome = nome;
 		this.telefone = telefone;
 		this.idade = idade;
