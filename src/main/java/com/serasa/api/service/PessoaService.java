@@ -1,10 +1,7 @@
 
 package com.serasa.api.service;
 
-import org.springframework.stereotype.Service;
+public class PessoaService {
 
-@Service
-public interface PessoaService {
-
-    
+	
 }
