@@ -1,10 +1,11 @@
 package com.serasa.api.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import lombok.Data;
 
@@ -16,22 +17,39 @@ public class PessoaModel {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // Gera automáticamente os ID's (auto-increment)
 	private Long id;
 
-	@Column(nullable = false)
+	@NotNull(message = "O nome é obrigatório")
 	private String nome;
 
-	@Column(nullable = false)
+	@NotNull(message = "Informe seu telefone")
 	private String telefone;
 
-	@Column(nullable = false)
+	@NotNull(message = "Informe sua idade")
 	private int idade;
 
-	@Column(nullable = false)
+	@NotNull(message = "Informe sua cidade")
 	private String cidade;
 
-	@Column(nullable = false)
+	@NotNull(message = "Informe seu estado com dois dígitos")
 	private String estado;
 
-	@Column(nullable = false)
+	@NotNull(message = "Informe o score")
 	private int score;
+
+	// Métodos construtores para test jUnit
+
+	public PessoaModel(String nome, String telefone, int idade, String cidade, String estado, int score) {
+		this.nome = nome;
+		this.telefone = telefone;
+		this.idade = idade;
+		this.cidade = cidade;
+		this.estado = estado;
+		this.score = score;
+	}
+
+	public PessoaModel() {
+
+	}
+
+
 
 }
