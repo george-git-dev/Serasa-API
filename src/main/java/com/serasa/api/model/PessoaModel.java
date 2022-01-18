@@ -5,8 +5,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
 import lombok.Data;
 
 @Data // cria os getters e setters automaticamente
@@ -34,6 +32,9 @@ public class PessoaModel {
 
 	@NotNull(message = "Informe o score")
 	private int score;
+	
+	private String scoreDescricao;
+
 
 	// Métodos construtores para test jUnit
 

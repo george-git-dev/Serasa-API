@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.serasa.api.model.PessoaModel;
 import com.serasa.api.repository.RepositoryPessoa;
+import com.serasa.api.service.PessoaService;
 
 @RestController
 @RequestMapping("/pessoa")
@@ -21,6 +22,9 @@ public class PessoaController {
 
 	@Autowired
 	private RepositoryPessoa repository;
+	
+	@Autowired
+	private PessoaService pessoaService;
 
 	@GetMapping
 	public ResponseEntity<List<PessoaModel>> getAll() {
@@ -35,13 +39,22 @@ public class PessoaController {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<PessoaModel> GetById(@PathVariable long id) {
-		return repository.findById(id).map(resposta -> ResponseEntity.status(HttpStatus.OK).body(resposta))
+		return repository.findById(id)
+				.map(resposta -> ResponseEntity.status(HttpStatus.OK).body(resposta))
 				.orElse(ResponseEntity.status(HttpStatus.NO_CONTENT).build());
 	}
-
+/*
 	@PostMapping
 	public ResponseEntity<PessoaModel> post(@RequestBody PessoaModel cadastro) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(cadastro));
+	}
+*/
+	@PostMapping
+	public ResponseEntity<PessoaModel> post(@RequestBody PessoaModel pessoa) {
+		return pessoaService.cadastrarPessoa(pessoa)
+				.map(resp -> ResponseEntity
+				.status(HttpStatus.CREATED).body(resp))
+				.orElse(ResponseEntity.status(HttpStatus.BAD_REQUEST).build());
 	}
 
 }
