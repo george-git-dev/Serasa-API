@@ -21,10 +21,11 @@ import org.springframework.http.ResponseEntity;
 import com.serasa.api.model.PessoaModel;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)//Anotação para analisar a classe que acessa os endpoints
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class PessoaControllerTest {
 
+	//Anotação para testar APIRest
 	@Autowired
 	private TestRestTemplate testRestTemplate;
 
@@ -42,11 +43,13 @@ public class PessoaControllerTest {
 	@DisplayName("Cadastrar Pessoa")
 	@Order(1)
 	public void salvarUsuarioRetornaStatus201() {
-
+		//Quando precisamos  consumir um endpoit temos que fazer uma requisição e o método HttpEntity permite isso
 		HttpEntity<PessoaModel> request = new HttpEntity<PessoaModel>(pessoaModel);
 		
+		//Mapeamento do endpoint a ser testado
 		ResponseEntity<PessoaModel> resposta = testRestTemplate.exchange("/pessoa", HttpMethod.POST, request, PessoaModel.class);
-		
+
+		//Com o assertEquals(boolean) perguntamos se há dentro da resposta esse statusCode (CREATED)
 		assertEquals(HttpStatus.CREATED, resposta.getStatusCode());
 
 	}
